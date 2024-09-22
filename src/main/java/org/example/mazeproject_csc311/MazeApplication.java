@@ -2,6 +2,7 @@ package org.example.mazeproject_csc311;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -29,12 +30,16 @@ public class MazeApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-
         //load the maze image
         mazeImg = new Image("maze.png");
         mazeView = new ImageView(mazeImg);
         //create the robot object
-        robot = new Robot("robot.png", mazeImg.getWidth(), mazeImg.getHeight());
+        robot = new Robot("robot.png", "maze.png");
+
+
+
+
+
         //create pane as the mazePane node
         Pane mazePane = new Pane(mazeView, robot.getImageView());
         mazePane.setFocusTraversable(true);
@@ -53,8 +58,9 @@ public class MazeApplication extends Application {
         maze2.setContent(maze2Pane); //set maze2Pane to be the content of the tab
         maze2.setClosable(false);//prevent user from closing tab
 
+
         //create the scene
-        Scene scene = new Scene(tabPane, mazeImg.getWidth() + 15, mazeImg.getHeight() + 35);
+        Scene scene = new Scene(tabPane, mazeImg.getWidth() + 15, mazeImg.getHeight() + 55);
 
         //add key listeners to move the robot
         mazePane.setOnKeyPressed(event -> {
@@ -85,6 +91,9 @@ public class MazeApplication extends Application {
 
         // Initially request focus on the mazePane
         mazePane.requestFocus();
+
+
+
 
 
 

@@ -8,21 +8,21 @@ import javafx.scene.paint.Color;
 public class Robot {
 
     //private members
-    private String robotImgUrl;
     private Image robotImg;
     private ImageView robotView;
+    private Image mazeImg;
     private int mazeWidth;
     private int mazeHeight;
 
 
-    public Robot(String ImageURL, double mazeWidth, double mazeHeight) {
-        this.robotImgUrl = ImageURL;
-        this.robotImg = new Image(ImageURL);
+    public Robot(String robotImageURL, String mazeImgUrl) {
+        this.robotImg = new Image(robotImageURL);
         this.robotView = new ImageView(this.robotImg);
         this.robotView.setX(15);
         this.robotView.setY(260);
-        this.mazeWidth = (int) mazeWidth;
-        this.mazeHeight = (int) mazeHeight;
+        this.mazeImg = new Image(mazeImgUrl);
+        this.mazeWidth = (int) this.mazeImg.getWidth();
+        this.mazeHeight = (int) this.mazeImg.getHeight();
     }
 
     //return robotView
@@ -32,18 +32,19 @@ public class Robot {
 
     public void move(double x, double y){
 
+        //new coordinates for robot
         double updatedX = robotView.getX() + x;
         double updatedY = robotView.getY() + y;
 
         //
-        Image image = new Image("maze.png");
-        PixelReader pixelReader = image.getPixelReader();
+        //Image image = new Image("maze.png");
+        PixelReader pixelReader = mazeImg.getPixelReader();
 
         //dimensions of robot
         int robotWidth = (int)robotImg.getWidth();
         int robotHeight = (int)robotImg.getHeight();
 
-        //make sure robot is in the bounds of the robot
+        //make sure robot is in the bounds of the maze
         if(updatedX >= 0 && updatedX <= mazeWidth && updatedY >= 0 && updatedY <= mazeHeight
         && updatedX + robotWidth >= 0 && updatedX + robotWidth <= mazeWidth && updatedY + robotHeight >= 0 && updatedY + robotHeight <= mazeHeight)
         {
