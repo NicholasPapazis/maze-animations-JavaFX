@@ -8,13 +8,17 @@ import javafx.scene.paint.Color;
 public class Robot {
 
     //private members
+    private String robotImgUrl;
+    private Image robotImg;
     private ImageView robotView;
     private int mazeWidth;
     private int mazeHeight;
 
 
     public Robot(String ImageURL, double mazeWidth, double mazeHeight) {
-        this.robotView = new ImageView(new Image(ImageURL));
+        this.robotImgUrl = ImageURL;
+        this.robotImg = new Image(ImageURL);
+        this.robotView = new ImageView(this.robotImg);
         this.robotView.setX(15);
         this.robotView.setY(260);
         this.mazeWidth = (int) mazeWidth;
@@ -35,9 +39,9 @@ public class Robot {
         Image image = new Image("maze.png");
         PixelReader pixelReader = image.getPixelReader();
 
-        //make dimensions of robot smaller it fits through path easier
-        int robotWidth = 20;
-        int robotHeight = 20;
+        //dimensions of robot
+        int robotWidth = (int)robotImg.getWidth();
+        int robotHeight = (int)robotImg.getHeight();
 
         //make sure robot is in the bounds of the robot
         if(updatedX >= 0 && updatedX <= mazeWidth && updatedY >= 0 && updatedY <= mazeHeight
